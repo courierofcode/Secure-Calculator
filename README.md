@@ -69,6 +69,10 @@ Web Browser
 ## 🎈 Usage <a name="usage"></a>
 The program can be run in any browser supporting WebAssembly. These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+```
+    Process...
+```
+
 ## 🚀 Deployment <a name = "deployment"></a>
 Hosted by GitHub
 
