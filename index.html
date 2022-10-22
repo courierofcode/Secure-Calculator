@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>Secure-Calculator</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1.0, width=device-width">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="icon" type="image/png" href="/assets/calculator.png">
+        <script src="/app.js"></script>
+    </head>
+
+    <body>
+        <table class="calculator">
+            <tr>
+                <th class="description" colspan="6">Secure Calculator</th>
+            </tr>
+            <tr>
+                <td class="description">Stack (A)</td>
+                <td colspan="5"><input class="display-box" type="text" id="valueA" value=0 disabled /></td>
+            </tr>
+            <tr>
+                <td class="description">Stack (B)</td>
+                <td colspan="5"><input class="display-box" type="text" id="valueB" value=0 disabled /></td>
+            </tr>
+            <tr>
+                <td><input class="selected" type="text" id="op" disabled /></td>
+                <td colspan="3"><input class="display-box" type="text" id="result" disabled /></td>
+                <td><input type="button" value="PUSH" onclick="pushToStack()" id="btn" /></td>
+                <td><input type="button" value="CLR" onclick="clearScreen()" id="btn" /></td>
+            </tr>
+            <tr>
+                <td><input class="keypad" type="button" value="1" onclick="display('1')" /></td>
+                <td><input class="keypad" type="button" value="2" onclick="display('2')" /></td>
+                <td><input class="keypad" type="button" value="3" onclick="display('3')" /></td>
+                <td><input class="operation" type="button" value="+" onclick="operator('+')" /></td>
+                <td><input class="operation" type="button" value="*" onclick="operator('*')" /></td>
+                <td><input class="operation" type="button" value="&lt;&lt;" onclick="operator('&lt;&lt;')" /></td>
+            </tr>
+            <tr>
+                <td><input class="keypad" type="button" value="4" onclick="display('4')" /></td>
+                <td><input class="keypad" type="button" value="5" onclick="display('5')" /></td>
+                <td><input class="keypad" type="button" value="6" onclick="display('6')" /></td>
+                <td><input class="operation" type="button" value="-" onclick="operator('-')" /></td>
+                <td><input class="operation" type="button" value="/" onclick="operator('/')" /></td>
+                <td><input class="operation" type="button" value="&gt;&gt;" onclick="operator('&gt;&gt;')" /></td>
+            </tr>
+            <tr>
+                <td><input class="keypad" type="button" value="7" onclick="display('7')" /></td>
+                <td><input class="keypad" type="button" value="8" onclick="display('8')" /></td>
+                <td><input class="keypad" type="button" value="9" onclick="display('9')" /></td>
+                <td><input class="operation" type="button" value="AND" onclick="operator('AND')" /></td>
+                <td><input class="operation" type="button" value="OR" onclick="operator('OR')" /></td>
+                <td><input class="operation" type="button" value="NOT" onclick="operator('NOT')" /></td>
+            </tr>
+            <tr>
+                <td><input class="keypad" type="button" value="NEG" onclick="operator('NEG')" /></td>
+                <td><input class="keypad" type="button" value="." onclick="display('.')" /></td>
+                <td><input class="keypad" type="button" value="0" onclick="display('0')" /></td>
+                <td><input class="operation" type="button" value="=" onclick="calculate()" id="calc" /></td>
+                <td><input class="operation" type="button" value="%" onclick="operator('%')" /></td>
+                <td><input class="operation" type="button" value="←" onclick="backSpace()" id="btn" /></td>
+            </tr>
+        </table>
+    </body>
+</html>
