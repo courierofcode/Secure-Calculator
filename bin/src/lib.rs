@@ -2,9 +2,33 @@
 #![allow(unused_assignments)]
 #![allow(unused_mut)]
 #![allow(dead_code)]
+#![feature(proc_macro, wasm_custom_section, wasm_import_module)]
 use std::io;
+use wasm_bindgen::prelude::*;
 
-fn is_int(str: String) -> bool {
+#[wasm_bindgen]
+extern "C" {
+    fn alert(s: &str);
+
+    type HTMLDocument;
+    type Element;
+    static document: HTMLDocument;
+
+    #[wasm_bindgen(method)]
+    fn createElement(this: &HTMLDocument, tagName: &str) -> Element;
+
+    #[wasm_bindgen(method, getter)]
+    fn body(this: &HTMLDocument) -> Element;
+
+    #[wasm_bindgen(method, js_name = appendChild)]
+    fn append(this: &Element, item: Element);
+
+    #[wasm_bindgen(method, setter = innerHTML)]
+    fn set_inner(this: &Element, html: &str);
+}
+
+#[wasm_bindgen]
+pub fn is_int(str: String) -> bool {
     let mut result: bool = false;
     for char in str.chars() {
         if char.is_numeric() {
@@ -19,7 +43,8 @@ fn is_int(str: String) -> bool {
     }
     return result;
 }
-fn is_float(str: String) -> bool {
+#[wasm_bindgen]
+pub fn is_float(str: String) -> bool {
     let mut dec_point: i64 = 0;
     let mut result: bool = false;
     for char in str.chars() {
@@ -37,7 +62,8 @@ fn is_float(str: String) -> bool {
     }
     return result;
 }
-fn is_op_int(str: String) -> bool {
+#[wasm_bindgen]
+pub fn is_op_int(str: String) -> bool {
     let mut result: bool = false;
     if str.eq("+") {
         result = true;
@@ -60,7 +86,8 @@ fn is_op_int(str: String) -> bool {
     }
     return result;
 }
-fn is_op_float(str: String) -> bool {
+#[wasm_bindgen]
+pub fn is_op_float(str: String) -> bool {
     let mut result: bool = false;
     if str.eq("+") {
         result = true;
@@ -73,7 +100,8 @@ fn is_op_float(str: String) -> bool {
     }
     return result;
 }
-fn is_op_unary(str: String) -> bool {
+#[wasm_bindgen]
+pub fn is_op_unary(str: String) -> bool {
     let mut result: bool = false;
     if str.eq("NOT") {
         result = true;
@@ -82,7 +110,7 @@ fn is_op_unary(str: String) -> bool {
     }
     return result;
 }
-
+#[wasm_bindgen]
 pub fn rust_calc_int(value_a: i64, value_b: i64, operation: &str) -> i64 {
     let mut result: i64 = 0;
 
@@ -107,7 +135,7 @@ pub fn rust_calc_int(value_a: i64, value_b: i64, operation: &str) -> i64 {
     }
     return result;
 }
-
+#[wasm_bindgen]
 pub fn rust_calc_unary(value: i64, operation: &str) -> i64 {
     let mut result: i64 = 0;
     if operation.starts_with("NOT") {
@@ -117,7 +145,7 @@ pub fn rust_calc_unary(value: i64, operation: &str) -> i64 {
     }
     return result;
 }
-
+#[wasm_bindgen]
 pub fn rust_calc_float(value_a: f64, value_b: f64, operation: &str) -> f64 {
     let mut f_result: f64 = 1.1;
     if operation.starts_with("+") {
@@ -131,20 +159,22 @@ pub fn rust_calc_float(value_a: f64, value_b: f64, operation: &str) -> f64 {
     }
     return f_result;
 }
-
+#[wasm_bindgen]
 pub fn int_value(x: Option<f64>) -> i64 {
     match x {
         Some(x) => x as i64,
         None => -1,
     }
 }
+#[wasm_bindgen]
 pub fn float_value(x: Option<f64>) -> f64 {
     match x {
         Some(x) => x,
         None => -1.0,
     }
 }
-fn main() {
+#[wasm_bindgen]
+pub fn main() {
     let int_ops: Vec<&str> = vec![
         "+<2>", "*<2>", "-<2>", "/<2>", ">><2>", "AND<2>", "OR<2>", "NOT<1>", "NEG<1>", "%<2>",
     ];
