@@ -1,8 +1,3 @@
-#![allow(unused_variables)]
-#![allow(unused_assignments)]
-#![allow(unused_mut)]
-#![allow(dead_code)]
-#![feature(proc_macro, wasm_custom_section, wasm_import_module)]
 use std::io;
 use wasm_bindgen::prelude::*;
 
@@ -25,6 +20,84 @@ extern "C" {
 
     #[wasm_bindgen(method, setter = innerHTML)]
     fn set_inner(this: &Element, html: &str);
+}
+
+#[wasm_bindgen]
+pub fn rust_calculate(expr: &str) -> f64 {
+    // Declare used variables
+    let mut expr = String::new();
+    let mut int_a: i64 = 0;
+    let mut int_b: i64 = 0;
+    let mut int_result: i64 = 0;
+    let mut float_a: f64 = 0.0;
+    let mut float_b: f64 = 0.0;
+    let mut float_result: f64 = 0.0;
+    let mut op: &str;
+
+    let line_split = expr.trim().split(" ");
+
+    let mut stack: Vec<&str> = line_split.collect();
+
+    // let mut count: usize = 0;
+    let mut parsed_vec: Vec<f64> = Vec::new();
+
+    for item in stack {
+        /*
+        // Error Checking
+        println!(
+            "is int({0}){1}, is float({0}){2}, is op({0}){3}",
+            item,
+            is_int(item.to_string()),
+            is_float(item.to_string()),
+            is_op_unary(item.to_string())
+        );
+        */
+
+        if is_int(item.to_string()) {
+            // Populate Stack
+            parsed_vec.push(item.trim().parse().expect("Invalid Integer"));
+        } else if is_float(item.to_string()) {
+            // Populate Stack
+            parsed_vec.push(item.trim().parse().expect("Invalid Float"));
+        } else if is_op_unary(item.to_string()) {
+            // Get operand & operator
+            op = item.trim();
+            int_a = int_value(parsed_vec.pop());
+            // Calculate & push result to stack
+            int_result = rust_calc_unary(int_a, op);
+            parsed_vec.push(int_result as f64);
+        } else if is_op_float(item.to_string()) {
+            // Get operands & operator
+            op = item.trim();
+            float_a = float_value(parsed_vec.pop());
+            float_b = float_value(parsed_vec.pop());
+            // Calculate & push result to stack
+            float_result = rust_calc_float(float_a, float_b, op);
+            parsed_vec.push(float_result);
+        } else if is_op_int(item.to_string()) {
+            // Get operands & operator
+            op = item.trim();
+            int_a = int_value(parsed_vec.pop());
+            int_b = int_value(parsed_vec.pop());
+            // Calculate & push ressult to stack
+            int_result = rust_calc_int(int_a, int_b, op);
+            parsed_vec.push(int_result as f64);
+        } else {
+            panic!("Error: Invalid syntax!");
+        }
+        /*
+        // Error Checking
+        println!("{:?}", parsed_vec);
+        */
+    }
+
+    // Print Final Result
+    let final_result = float_value(parsed_vec.pop());
+    if final_result.trunc() == final_result {
+        return final_result.trunc();
+    } else {
+        return final_result;
+    }
 }
 
 #[wasm_bindgen]
@@ -173,6 +246,7 @@ pub fn float_value(x: Option<f64>) -> f64 {
         None => -1.0,
     }
 }
+
 #[wasm_bindgen]
 pub fn main() {
     let int_ops: Vec<&str> = vec![
@@ -274,49 +348,3 @@ pub fn main() {
     }
 }
 
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-
-//     #[test]
-//     fn int_calc_works() {
-//         let result_add = rust_calc_int(2, 2, "+");
-//         let result_mult = rust_calc_int(2, 1, "*");
-//         let result_asl = rust_calc_int(4, 2, "<<");
-//         let result_sub = rust_calc_int(2, 2, "-");
-//         let result_div = rust_calc_int(2, 2, "/");
-//         let result_asr = rust_calc_int(16, 2, ">>");
-//         let result_and = rust_calc_int(8, 2, "AND");
-//         let result_or = rust_calc_int(8, 2, "OR");
-//         let result_not = rust_calc_int(2, 999, "NOT");
-//         let result_neg = rust_calc_int(2, 999, "NEG");
-//         let result_mod = rust_calc_int(2, 1, "%");
-
-//         assert_eq!(result_add, 4);
-//         assert_eq!(result_mult, 2);
-//         assert_eq!(result_asl, 16);
-//         assert_eq!(result_sub, 0);
-//         assert_eq!(result_div, 1);
-//         assert_eq!(result_asr, 4);
-//         assert_eq!(result_and, 0);
-//         assert_eq!(result_or, 10);
-//         assert_eq!(result_not, -3);
-//         assert_eq!(result_neg, -2);
-//         assert_eq!(result_mod, 0);
-//     }
-
-//     #[test]
-//     fn float_calc_works() {
-//         let result_add = rust_calc_float(2.1, 2.3, "+");
-//         let result_mult = rust_calc_float(8.8, 0.5, "*");
-//         let result_sub = rust_calc_float(5.5, 1.1, "-");
-//         let result_div = rust_calc_float(4.4, 1.0, "/");
-//         let result_neg = rust_calc_float(-4.4, 999.9, "NEG");
-
-//         assert_eq!(result_add, 4.4);
-//         assert_eq!(result_mult, 4.4);
-//         assert_eq!(result_sub, 4.4);
-//         assert_eq!(result_div, 4.4);
-//         assert_eq!(result_neg, 4.4);
-//     }
-// }
