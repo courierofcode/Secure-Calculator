@@ -1,6 +1,5 @@
 <p align="center">
-    <a href="" rel="noopener">
-    <img width=200px height=200px src="https://i.imgur.com/ggKG1M9.png" alt="Project logo"></a>
+    <img width=300px height=300px src="https://i.imgur.com/ggKG1M9.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Secure-Calculator</h3>
@@ -48,7 +47,7 @@ Web Browser
 
 ### Demo
 <p align="center">
-    <img width=200px height=200px src="https://i.imgur.com/bQuYUdF.gif" alt="Project demo"></a>
+    <img width=300px height=300px src="https://i.imgur.com/bQuYUdF.gif" alt="Project demo"></a>
 </p>
 
 ---
