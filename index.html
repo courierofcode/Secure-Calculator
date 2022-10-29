@@ -12,21 +12,12 @@
     <body>
         <table class="calculator">
             <tr>
-                <th class="description" colspan="6">Secure Calculator</th>
+                <th class="description" colspan="6">Secure Calculator (Post-Fix)</th>
             </tr>
             <tr>
-                <td class="description">Stack (A)</td>
-                <td colspan="5"><input class="display-box" type="text" id="valueA" value=0 disabled /></td>
-            </tr>
-            <tr>
-                <td class="description">Stack (B)</td>
-                <td colspan="5"><input class="display-box" type="text" id="valueB" value=0 disabled /></td>
-            </tr>
-            <tr>
-                <td><input class="selected" type="text" id="op" disabled /></td>
-                <td colspan="3"><input class="display-box" type="text" id="result" disabled /></td>
-                <td><input type="button" value="PUSH" onclick="pushToStack()" id="btn" /></td>
-                <td><input type="button" value="CLR" onclick="clearScreen()" id="btn" /></td>
+                <td><input type="button" value="CLR" onclick="clearScreen()" id="clrBtn" /></td>
+                <td colspan="4"><input class="display-box" type="text" id="result" disabled /></td>
+                <td><input type="button" value="PUSH" onclick="pushToStack()" id="pushBtn"></td>
             </tr>
             <tr>
                 <td><input class="keypad" type="button" value="1" onclick="display('1')" /></td>
@@ -58,7 +49,7 @@
                 <td><input class="keypad" type="button" value="0" onclick="display('0')" /></td>
                 <td><input class="operation" type="button" value="=" onclick="calculate()" id="calc" /></td>
                 <td><input class="operation" type="button" value="%" onclick="operator('%')" /></td>
-                <td><input class="operation" type="button" value="←" onclick="backSpace()" id="btn" /></td>
+                <td><input class="operation" type="button" value="←" onclick="backSpace()" id="backBtn" /></td>
             </tr>
         </table>
     </body>
