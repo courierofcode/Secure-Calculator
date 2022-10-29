@@ -46,21 +46,9 @@ Web Browser
     - [x] Arithmetic: +. -, *, /, negate
     - [x] Logical: >>, <<, AND, OR, NOT
 
-### Wireframes
-<p align="center">
-    <a href="" rel="noopener">
-    <img width=200px height=200px src="" alt="Project wireframe"></a>
-</p>
-
-### Mockups
-<p align="center">
-    <a href="" rel="noopener">
-    <img width=200px height=200px src="" alt="Project mockup"></a>
-</p>
-
 ### Demo
 <p align="center">
-    <a href="" rel="noopener">
+    <a href="https://i.imgur.com/bQuYUdF.gif" rel="noopener">
     <img width=200px height=200px src="" alt="Project demo"></a>
 </p>
 
