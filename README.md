@@ -48,8 +48,7 @@ Web Browser
 
 ### Demo
 <p align="center">
-    <a href="https://i.imgur.com/bQuYUdF.gif" rel="noopener">
-    <img width=200px height=200px src="" alt="Project demo"></a>
+    <img width=200px height=200px src="https://i.imgur.com/bQuYUdF.gif" alt="Project demo"></a>
 </p>
 
 ---
