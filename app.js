@@ -19,7 +19,7 @@ function operator(value){
 function calculate(){
     const expr = document.getElementById("result");
     
-    const result = 0;
+    const result = rust_calculate(expr);
 
     document.getElementById("result").value = result;
 }
